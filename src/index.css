@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
+  body {
+    @apply bg-white dark:bg-cyberpunk-dark text-gray-900 dark:text-gray-100 transition-colors duration-300;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-cyber;
+  }
+}
+
+@layer components {
+  .cyber-btn {
+    @apply relative px-6 py-3 font-cyber uppercase text-sm tracking-wider
+    bg-black dark:bg-cyberpunk-dark border border-accent-400 
+    text-white hover:text-accent-400 
+    transition-all duration-300 overflow-hidden
+    before:absolute before:inset-0 before:border-t-2 before:border-accent-400
+    before:transform before:translate-x-[-100%] before:transition-transform before:duration-300
+    hover:before:translate-x-0
+    after:absolute after:inset-0 after:border-b-2 after:border-accent-400
+    after:transform after:translate-x-[100%] after:transition-transform after:duration-300
+    hover:after:translate-x-0;
+  }
+
+  .glow-text {
+    text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
+  }
+
+  .cyberpunk-card {
+    @apply bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800
+    relative overflow-hidden rounded-md shadow-lg 
+    before:absolute before:top-0 before:left-0 before:w-1 before:h-full before:bg-accent-500;
+  }
+
+  .cursor-dot {
+    @apply pointer-events-none fixed left-0 top-0 w-6 h-6 rounded-full 
+    mix-blend-difference bg-accent-400 opacity-70 z-50 transition-transform duration-150 ease-out;
+  }
+
+  .cursor-ring {
+    @apply pointer-events-none fixed left-0 top-0 w-12 h-12 rounded-full 
+    border-2 border-accent-300 opacity-70 z-40 transition-all duration-300 ease-out;
+  }
+  
+  .loader {
+    @apply fixed inset-0 flex items-center justify-center bg-cyberpunk-dark z-50;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-100 dark:bg-gray-900;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary-500 dark:bg-accent-500 rounded-full;
+  }
+}
+
+.speed-gauge-container {
+  position: relative;
+  width: 220px;
+  height: 220px;
+}
+
+.speed-gauge {
+  transform: rotate(-90deg);
+}
+
+.speed-gauge circle {
+  fill: none;
+  stroke-width: 10;
+  stroke-linecap: round;
+}
+
+.speed-gauge-bg {
+  stroke: #3f3f46;
+}
+
+.speed-gauge-value {
+  stroke: currentColor;
+  transition: stroke-dasharray 0.8s ease;
+}
+
+.cursor-glow::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: radial-gradient(circle at var(--x) var(--y), rgba(14, 165, 233, 0.15), transparent 80%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.cursor-glow:hover::before {
+  opacity: 1;
+}
+
+.glitch {
+  position: relative;
+  overflow: hidden;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch::before {
+  left: 2px;
+  text-shadow: -1px 0 #00ffff;
+  clip: rect(24px, 550px, 90px, 0);
+  animation: glitch-anim 3s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+  left: -2px;
+  text-shadow: -1px 0 #ff00ff;
+  clip: rect(85px, 550px, 140px, 0);
+  animation: glitch-anim 2.5s 0.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% {
+    clip: rect(24px, 550px, 90px, 0);
+  }
+  20% {
+    clip: rect(46px, 550px, 34px, 0);
+  }
+  40% {
+    clip: rect(56px, 550px, 78px, 0);
+  }
+  60% {
+    clip: rect(12px, 550px, 23px, 0);
+  }
+  80% {
+    clip: rect(85px, 550px, 140px, 0);
+  }
+  100% {
+    clip: rect(67px, 550px, 12px, 0);
+  }
+}

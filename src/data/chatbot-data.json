@@ -1,0 +1,95 @@
+{
+    "knowledgeBase": [
+        {
+            "keywords": [
+                "slow",
+                "speed",
+                "improve",
+                "faster",
+                "increase"
+            ],
+            "response": "To improve your network speed: 1) Restart your router, 2) Position it centrally and away from interference, 3) Use an Ethernet cable for critical devices, 4) Upgrade your router if it's older than 3-4 years, 5) Contact your ISP to check if your plan meets your needs."
+        },
+        {
+            "keywords": [
+                "ping",
+                "latency",
+                "delay",
+                "lag"
+            ],
+            "response": "High ping/latency is often caused by: 1) Distance to the server you're connecting to, 2) Network congestion, 3) Wireless interference, 4) Outdated router firmware, 5) Background applications using bandwidth. Try using a wired connection and closing unused applications for better results."
+        },
+        {
+            "keywords": [
+                "router",
+                "modem",
+                "wifi",
+                "wireless"
+            ],
+            "response": "For optimal router performance: 1) Place it centrally in your home, 2) Keep it elevated and away from obstructions, 3) Update the firmware regularly, 4) Consider a mesh network for larger spaces, 5) Separate 2.4GHz and 5GHz networks (5GHz is faster but has shorter range)."
+        }
+    ],
+    "greetings": {
+        "patterns": [
+            "hi",
+            "hello",
+            "hey",
+            "greetings",
+            "howdy",
+            "hola",
+            "good morning",
+            "good afternoon",
+            "good evening"
+        ],
+        "responses": [
+            "Hello! I'm Aura, your network assistant. How can I help with your connection today?",
+            "Hi there! I'm Aura. I can help you diagnose network issues or improve your internet experience. What do you need?",
+            "Hey! I'm ready to help with your network questions. What would you like to know about your connection?",
+            "Greetings! I'm Aura, your network guide. Having connection issues or want to optimize your setup?"
+        ]
+    },
+    "fallback": [
+        "I'm not sure I understand that question. Could you ask about your internet speed, connection problems, or how to improve your network?",
+        "I don't have specific information about that. Would you like to know about improving your connection speed or fixing common network issues?",
+        "I'm specialized in network topics. Try asking about Wi-Fi optimization, router placement, or suitable activities for your connection speed.",
+        "I don't have an answer for that. I can help with questions about ping, latency, speed tests, or connection troubleshooting if you'd like.",
+        "I'm not able to help with that query. I'm happy to assist with network diagnostics, speed improvement tips, or internet plan recommendations."
+    ],
+    "speedRanges": [
+        {
+            "range": [
+                0,
+                10
+            ],
+            "response": "{speed} Mbps is a relatively slow connection. You can browse basic websites and check email, but you may struggle with video streaming above 480p, online gaming, or video calls. Consider upgrading if these activities are important to you."
+        },
+        {
+            "range": [
+                10,
+                25
+            ],
+            "response": "{speed} Mbps is adequate for basic internet use. You can stream standard definition videos, have video calls, and do basic online gaming, but multiple users or 4K streaming might be problematic."
+        },
+        {
+            "range": [
+                25,
+                50
+            ],
+            "response": "{speed} Mbps is a decent connection speed. Most households can stream HD content, play online games, and have video calls without major issues. Multiple users might experience slowdowns during bandwidth-intensive activities."
+        },
+        {
+            "range": [
+                50,
+                100
+            ],
+            "response": "{speed} Mbps is a good connection speed. You can stream HD content on multiple devices, play online games, and have high-quality video calls simultaneously in most households."
+        },
+        {
+            "range": [
+                100,
+                "infinity"
+            ],
+            "response": "{speed} Mbps is an excellent connection speed! You can stream 4K content on multiple devices, download large files quickly, play competitive online games, and have multiple video calls without issues."
+        }
+    ]
+}
