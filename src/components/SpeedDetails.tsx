@@ -202,7 +202,7 @@ const SpeedDetails: React.FC<SpeedDetailsProps> = ({
       </div>
 
       <div className="mt-8 p-6 bg-gray-50 dark:bg-gray-800 rounded-lg flex flex-col items-center">
-        <h4 className="font-cyber text-lg mb-6 text-center">Stay Updated with Speed Test Results</h4>
+        <h4 className="font-cyber text-lg mb-6 text-center">Stay Updated with Latest Tech Trends </h4>
         <form onSubmit={handleNewsletterSubmit} className="w-full max-w-md">
           <div className="flex flex-col sm:flex-row gap-3">
             <input

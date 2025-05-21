@@ -1,8 +1,8 @@
-import React from 'react';
 import { motion } from 'framer-motion';
+import { Github, Linkedin, Mail, MapPin, Phone, Twitter } from 'lucide-react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Logo from './Logo';
-import { Github, Twitter, Linkedin, Mail } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
@@ -90,23 +90,40 @@ const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h3 className="font-cyber text-lg mb-4">Stay Connected</h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-              Subscribe to our newsletter for the latest updates and tips.
-            </p>
-            <form className="flex" onSubmit={(e) => e.preventDefault()}>
-              <input
-                type="email"
-                placeholder="Your email"
-                className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 p-2 text-sm rounded-l-md focus:outline-none focus:ring-1 focus:ring-accent-500 border border-gray-300 dark:border-gray-700"
-              />
-              <button
-                type="submit"
-                className="bg-accent-500 text-white px-4 py-2 rounded-r-md text-sm hover:bg-accent-600 transition-colors"
-              >
-                Subscribe
-              </button>
-            </form>
+            <h3 className="font-cyber text-lg mb-4">Contact Us</h3>
+            <ul className="space-y-3">
+              <li className="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                <Phone size={16} className="mr-2" />
+                <a
+                  href="tel:+917008450074"
+                  className="hover:text-accent-500 dark:hover:text-accent-400 transition-colors"
+                >
+                  +91 7008450074
+                </a>
+              </li>
+              <li className="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                <Mail size={16} className="mr-2" />
+                <a
+                  href="mailto:someshranjanbiswal13678@gmail.com"
+                  className="hover:text-accent-500 dark:hover:text-accent-400 transition-colors"
+                >
+                  someshranjanbiswal13678@gmail.com
+                </a>
+              </li>
+              <li className="flex items-start text-sm text-gray-600 dark:text-gray-400">
+                <MapPin size={21} className="mr-2 mt-1" />
+                <div>
+                  <address className="not-italic mb-4">
+                    Radha Krushna Bazar, Dhenkanal<br />
+                    Odisha 759001<br />
+                    India
+                  </address>
+                  <div className="rounded-lg overflow-hidden shadow-lg mt-2 w-full">
+                    
+                  </div>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
 
@@ -123,12 +140,6 @@ const Footer: React.FC = () => {
             <Link to="https://www.somesh.social/" className="text-sm text-gray-500 dark:text-gray-400 hover:text-accent-500 dark:hover:text-accent-400 transition-colors">
               Made with ❤️ by somesh.social
             </Link>
-            {/* <Link to="/terms" className="text-sm text-gray-500 dark:text-gray-400 hover:text-accent-500 dark:hover:text-accent-400 transition-colors">
-              Terms
-            </Link>
-            <Link to="/cookies" className="text-sm text-gray-500 dark:text-gray-400 hover:text-accent-500 dark:hover:text-accent-400 transition-colors">
-              Cookies
-            </Link> */}
           </div>
         </motion.div>
       </div>
