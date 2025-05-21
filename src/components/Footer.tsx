@@ -18,15 +18,15 @@ const Footer: React.FC = () => {
               Providing accurate network speed analysis and recommendations since 2025.
             </p>
             <div className="flex space-x-4 mt-4">
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-accent-500 transition-colors">
+              <a href="https://x.com/SomeshR82674271" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-accent-500 transition-colors">
                 <Twitter size={20} />
                 <span className="sr-only">Twitter</span>
               </a>
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-accent-500 transition-colors">
+              <a href="https://github.com/ei-sanu" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-accent-500 transition-colors">
                 <Github size={20} />
                 <span className="sr-only">GitHub</span>
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-accent-500 transition-colors">
+              <a href="https://www.linkedin.com/in/somesh-biswal-b73576320?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-accent-500 transition-colors">
                 <Linkedin size={20} />
                 <span className="sr-only">LinkedIn</span>
               </a>
@@ -119,7 +119,7 @@ const Footer: React.FC = () => {
                     India
                   </address>
                   <div className="rounded-lg overflow-hidden shadow-lg mt-2 w-full">
-                    
+
                   </div>
                 </div>
               </li>

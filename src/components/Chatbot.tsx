@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { X, Send, ArrowUp, Bot } from 'lucide-react';
-import { getAuraResponse } from '../utils/chatbot-utils';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Bot, Send, X } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { findBestMatch } from '../utils/chatbot-utils';
 
 interface Message {
   id: string;
@@ -25,7 +25,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ onClose }) => {
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -41,32 +41,32 @@ const Chatbot: React.FC<ChatbotProps> = ({ onClose }) => {
 
   const handleSendMessage = async () => {
     if (inputValue.trim() === '') return;
-    
+
     const newUserMessage: Message = {
       id: Date.now().toString(),
       sender: 'user',
       text: inputValue,
       timestamp: new Date(),
     };
-    
+
     setMessages(prev => [...prev, newUserMessage]);
     setInputValue('');
     setIsTyping(true);
-    
-    // Get bot response after slight delay to simulate thinking
-    setTimeout(async () => {
-      const response = await getAuraResponse(inputValue);
-      
+
+    // Get response from chatbot data
+    setTimeout(() => {
+      const response = findBestMatch(inputValue);
+
       const newBotMessage: Message = {
         id: (Date.now() + 1).toString(),
         sender: 'bot',
         text: response,
         timestamp: new Date(),
       };
-      
+
       setMessages(prev => [...prev, newBotMessage]);
       setIsTyping(false);
-    }, 1000);
+    }, 800);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -89,7 +89,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ onClose }) => {
           <Bot size={24} className="mr-2" />
           <h3 className="font-cyber text-lg">Aura</h3>
         </div>
-        <button 
+        <button
           onClick={onClose}
           className="text-white hover:text-gray-200 transition-colors"
           aria-label="Close chat"
@@ -97,7 +97,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ onClose }) => {
           <X size={20} />
         </button>
       </div>
-      
+
       {/* Messages */}
       <div className="p-4 h-[380px] overflow-y-auto">
         <AnimatePresence>
@@ -109,12 +109,11 @@ const Chatbot: React.FC<ChatbotProps> = ({ onClose }) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
             >
-              <div 
-                className={`max-w-[80%] p-3 rounded-lg ${
-                  message.sender === 'user' 
-                    ? 'bg-primary-100 dark:bg-primary-900 text-gray-800 dark:text-white rounded-tr-none' 
+              <div
+                className={`max-w-[80%] p-3 rounded-lg ${message.sender === 'user'
+                    ? 'bg-primary-100 dark:bg-primary-900 text-gray-800 dark:text-white rounded-tr-none'
                     : 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-white rounded-tl-none'
-                }`}
+                  }`}
               >
                 <p className="text-sm">{message.text}</p>
                 <span className="text-xs text-gray-500 dark:text-gray-400 mt-1 block">
@@ -142,7 +141,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ onClose }) => {
         </AnimatePresence>
         <div ref={messagesEndRef} />
       </div>
-      
+
       {/* Input */}
       <div className="p-4 border-t border-gray-200 dark:border-gray-700">
         <div className="flex items-center">
