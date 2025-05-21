@@ -1,0 +1,15 @@
+.footer-hidden {
+    display: none;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Hide footer when specific routes are active */
+body[data-route="/about"] footer,
+body[data-route="/privacy"] footer,
+body[data-route="/terms"] footer,
+body[data-route="/contact"] footer {
+    display: none;
+}

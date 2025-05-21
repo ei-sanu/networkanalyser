@@ -1,0 +1,171 @@
+.speed-gauge-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.speed-gauge-container:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+}
+
+.speed-gauge {
+    transform: rotate(-90deg);
+}
+
+.speed-gauge-bg {
+    fill: none;
+    stroke-width: 12;
+    stroke-linecap: round;
+    transition: stroke 0.3s ease;
+}
+
+.speed-gauge-value {
+    fill: none;
+    stroke-width: 12;
+    stroke-linecap: round;
+    transition: stroke 0.3s ease;
+}
+
+.gauge-label {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    color: #f3f4f6;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+}
+
+.gauge-value {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0.25rem 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    transition: color 0.3s ease;
+    color: var(--gauge-color);
+}
+
+.gauge-unit {
+    font-size: 0.875rem;
+    opacity: 0.8;
+}
+
+@keyframes progress {
+    0% {
+        stroke-dashoffset: 0;
+    }
+
+    100% {
+        stroke-dashoffset: var(--progress-offset);
+    }
+}
+
+.speed-gauge circle,
+.speed-gauge line {
+    transition: all 0.5s ease-out;
+}
+
+.speed-gauge line {
+    transform-origin: center;
+    transition: transform 0.5s ease-out;
+}
+
+.download-gauge {
+    animation: fadeInScale 0.5s ease-out;
+    transition: box-shadow 0.3s ease;
+}
+
+.upload-gauge {
+    animation: fadeInScale 0.5s ease-out 0.5s;
+    animation-fill-mode: both;
+    transition: box-shadow 0.3s ease;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.download-gauge .speed-gauge-value,
+.upload-gauge .speed-gauge-value {
+    stroke: var(--gauge-color);
+    filter: drop-shadow(0 0 6px var(--gauge-color));
+}
+
+@keyframes celebrate {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.speed-gauge-container.celebrating {
+    animation: celebrate 0.5s ease-in-out;
+}
+
+.popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 40;
+}
+
+/* Add at the end of your existing CSS */
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.animate-bounce {
+    animation: bounce 1s infinite;
+}
+
+/* Popup styles */
+.popup-enter {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+}
+
+.popup-enter-active {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    transition: opacity 300ms, transform 300ms;
+}
+
+.popup-exit {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+}
+
+.popup-exit-active {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+    transition: opacity 300ms, transform 300ms;
+}

@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Play, Loader2, Wifi, Upload, Download, RefreshCw } from 'lucide-react';
-import SpeedGauge from './SpeedGauge';
+import { Download, Loader2, Play, RefreshCw, Upload, Wifi } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { playClickSound } from '../utils/sound-utils';
 import SpeedDetails from './SpeedDetails';
-import { getRecommendations } from '../utils/speed-utils';
+import SpeedGauge from './SpeedGauge';
 
 const SpeedTest: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -14,6 +14,11 @@ const SpeedTest: React.FC = () => {
 
   const runSpeedTest = async () => {
     if (isLoading) return;
+
+    // Play sound when test starts
+    if (hasTestedOnce) {
+      playClickSound();
+    }
 
     setIsLoading(true);
     setDownloadSpeed(0);
@@ -71,7 +76,7 @@ const SpeedTest: React.FC = () => {
   return (
     <section id="test" className="py-8 md:py-16">
       <div className="container mx-auto">
-        <motion.div 
+        <motion.div
           className="text-center max-w-3xl mx-auto mb-12"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -85,7 +90,7 @@ const SpeedTest: React.FC = () => {
           </p>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           className="max-w-5xl mx-auto bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -93,22 +98,22 @@ const SpeedTest: React.FC = () => {
         >
           <div className="p-6 md:p-10">
             <div className="flex flex-col items-center">
-              <motion.div 
+              <motion.div
                 className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 w-full"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
               >
-                <SpeedGauge 
-                  value={downloadSpeed} 
-                  max={150} 
+                <SpeedGauge
+                  value={downloadSpeed}
+                  max={150}
                   label="DOWNLOAD"
                   color="#0ea5e9"
                   unit="Mbps"
                 />
-                <SpeedGauge 
-                  value={uploadSpeed} 
-                  max={50} 
+                <SpeedGauge
+                  value={uploadSpeed}
+                  max={50}
                   label="UPLOAD"
                   color="#14b8a6"
                   unit="Mbps"
@@ -161,9 +166,9 @@ const SpeedTest: React.FC = () => {
               </motion.button>
 
               {hasTestedOnce && (
-                <SpeedDetails 
-                  downloadSpeed={downloadSpeed} 
-                  uploadSpeed={uploadSpeed} 
+                <SpeedDetails
+                  downloadSpeed={downloadSpeed}
+                  uploadSpeed={uploadSpeed}
                   pingTime={pingTime}
                 />
               )}

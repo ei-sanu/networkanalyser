@@ -23,6 +23,17 @@ const App: React.FC = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    const updateBodyRoute = () => {
+      document.body.dataset.route = window.location.pathname;
+    };
+
+    window.addEventListener('popstate', updateBodyRoute);
+    updateBodyRoute();
+
+    return () => window.removeEventListener('popstate', updateBodyRoute);
+  }, []);
+
   return (
     <>
       {loading ? (

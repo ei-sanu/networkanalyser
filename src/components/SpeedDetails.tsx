@@ -4,11 +4,19 @@ import React, { useEffect, useState } from 'react';
 import { getNetworkInfo } from '../utils/network-utils';
 import { getRecommendations } from '../utils/speed-utils';
 
+const playSuccessSound = () => {
+  const audio = new Audio('/sounds/success2.mp3');
+  audio.volume = 0.5; // Set volume to 50%
+  audio.play().catch(err => console.error('Error playing sound:', err));
+};
+
 interface SpeedDetailsProps {
   downloadSpeed: number;
   uploadSpeed: number;
   pingTime: number;
 }
+
+const GOOGLE_SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbyL4Gt01t4ZhjCW27vdq1pQdN9HNl97NIH3PPWyxU61UrC3Qf3GiOjABzKbK5GIjVhh/exec';
 
 const SpeedDetails: React.FC<SpeedDetailsProps> = ({
   downloadSpeed,
@@ -22,6 +30,9 @@ const SpeedDetails: React.FC<SpeedDetailsProps> = ({
     location: { city: 'Unknown', country: 'Unknown' }
   });
 
+  const [email, setEmail] = useState('');
+  const [subscriptionStatus, setSubscriptionStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
   useEffect(() => {
     const fetchNetworkInfo = async () => {
       const info = await getNetworkInfo();
@@ -30,6 +41,30 @@ const SpeedDetails: React.FC<SpeedDetailsProps> = ({
 
     fetchNetworkInfo();
   }, []);
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubscriptionStatus('loading');
+
+    try {
+      // Create URL with parameters instead of JSON body
+      const url = new URL(GOOGLE_SHEET_API_URL);
+      url.searchParams.append('email', email.trim());
+
+      const response = await fetch(url.toString(), {
+        method: 'POST',
+        mode: 'no-cors' // Keep this for CORS handling
+      });
+
+      setSubscriptionStatus('success');
+      setEmail('');
+      // Play success sound after successful subscription
+      playSuccessSound();
+    } catch (error) {
+      console.error('Newsletter subscription error:', error);
+      setSubscriptionStatus('error');
+    }
+  };
 
   return (
     <motion.div
@@ -164,6 +199,59 @@ const SpeedDetails: React.FC<SpeedDetailsProps> = ({
             </svg>
           </button>
         </div>
+      </div>
+
+      <div className="mt-8 p-6 bg-gray-50 dark:bg-gray-800 rounded-lg flex flex-col items-center">
+        <h4 className="font-cyber text-lg mb-6 text-center">Stay Updated with Speed Test Results</h4>
+        <form onSubmit={handleNewsletterSubmit} className="w-full max-w-md">
+          <div className="flex flex-col sm:flex-row gap-3">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email address"
+              className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md
+                       bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100
+                       focus:ring-2 focus:ring-accent-500 focus:border-accent-500
+                       w-full"
+              required
+              disabled={subscriptionStatus === 'loading'}
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+              title="Please enter a valid email address"
+            />
+            <button
+              type="submit"
+              disabled={subscriptionStatus === 'loading'}
+              className="px-6 py-2 bg-accent-500 hover:bg-accent-600 text-white rounded-md
+                       font-medium transition-colors disabled:opacity-50
+                       w-full sm:w-auto whitespace-nowrap"
+            >
+              {subscriptionStatus === 'loading' ? (
+                <span className="flex items-center justify-center">
+                  <svg className="animate-spin h-5 w-5 mr-2" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                  </svg>
+                  Subscribing...
+                </span>
+              ) : 'Subscribe for Updates'}
+            </button>
+          </div>
+          <div className="mt-3 text-center">
+            {subscriptionStatus === 'success' && (
+              <p className="text-sm text-green-600 dark:text-green-400 flex items-center justify-center">
+                <Check size={16} className="mr-2" />
+                Successfully subscribed! Thank you for joining.
+              </p>
+            )}
+            {subscriptionStatus === 'error' && (
+              <p className="text-sm text-red-600 dark:text-red-400 flex items-center justify-center">
+                <AlertTriangle size={16} className="mr-2" />
+                Unable to subscribe. Please try again later.
+              </p>
+            )}
+          </div>
+        </form>
       </div>
     </motion.div>
   );

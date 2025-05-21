@@ -39,7 +39,7 @@ const Navbar: React.FC = () => {
         {/* Desktop menu */}
         <nav className="hidden md:flex items-center gap-8">
           <Link to="/" className="font-cyber text-sm hover:text-accent-500 transition-colors">HOME</Link>
-          <Link to="/#test" className="font-cyber text-sm hover:text-accent-500 transition-colors">TEST SPEED</Link>
+          {/* <Link to="/#test" className="font-cyber text-sm hover:text-accent-500 transition-colors">TEST SPEED</Link> */}
           <Link to="/about" className="font-cyber text-sm hover:text-accent-500 transition-colors">ABOUT</Link>
           <ThemeToggle />
         </nav>
